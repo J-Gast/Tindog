@@ -43,20 +43,38 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like_image" translatesAutoresizingMaskIntoConstraints="NO" id="1DF-nD-EvM">
+                                                <rect key="frame" x="25" y="25" width="158" height="70"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="158" id="7uK-ff-tpR"/>
+                                                    <constraint firstAttribute="height" constant="70" id="OY8-Md-f4i"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nope_image" translatesAutoresizingMaskIntoConstraints="NO" id="SgG-Iu-tci">
+                                                <rect key="frame" x="168" y="25" width="158" height="70"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="70" id="KCp-IG-N5h"/>
+                                                    <constraint firstAttribute="width" constant="158" id="uSp-3E-2py"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="ak5-62-hs5" firstAttribute="top" secondItem="yoh-cK-nMp" secondAttribute="top" id="98r-FK-1gV"/>
                                             <constraint firstAttribute="bottom" secondItem="ak5-62-hs5" secondAttribute="bottom" id="Auv-Sz-Opf"/>
+                                            <constraint firstAttribute="trailing" secondItem="SgG-Iu-tci" secondAttribute="trailing" constant="25" id="Cwe-z2-UoA"/>
                                             <constraint firstItem="vB8-8s-CTd" firstAttribute="leading" secondItem="yoh-cK-nMp" secondAttribute="leading" constant="12" id="Iih-x2-8DW"/>
                                             <constraint firstAttribute="width" secondItem="yoh-cK-nMp" secondAttribute="height" multiplier="352:503" id="Ioy-a6-ZQL"/>
                                             <constraint firstItem="24P-sO-SN7" firstAttribute="leading" secondItem="yoh-cK-nMp" secondAttribute="leading" constant="14" id="NxJ-dL-RKq"/>
                                             <constraint firstItem="vB8-8s-CTd" firstAttribute="top" secondItem="yoh-cK-nMp" secondAttribute="top" constant="8" id="XX9-AJ-809"/>
                                             <constraint firstAttribute="trailing" secondItem="vB8-8s-CTd" secondAttribute="trailing" constant="12" id="Y69-4g-5uG"/>
+                                            <constraint firstItem="SgG-Iu-tci" firstAttribute="top" secondItem="yoh-cK-nMp" secondAttribute="top" constant="25" id="a8T-qw-gkx"/>
                                             <constraint firstAttribute="trailing" secondItem="ak5-62-hs5" secondAttribute="trailing" id="bNQ-b8-iPB"/>
                                             <constraint firstAttribute="trailing" secondItem="24P-sO-SN7" secondAttribute="trailing" constant="14" id="d0T-Md-83N"/>
                                             <constraint firstItem="24P-sO-SN7" firstAttribute="top" secondItem="vB8-8s-CTd" secondAttribute="bottom" constant="2.5" id="gS2-pz-CHN"/>
                                             <constraint firstItem="ak5-62-hs5" firstAttribute="leading" secondItem="yoh-cK-nMp" secondAttribute="leading" id="uS0-d1-siM"/>
+                                            <constraint firstItem="1DF-nD-EvM" firstAttribute="leading" secondItem="yoh-cK-nMp" secondAttribute="leading" constant="25" id="udo-4d-hsO"/>
+                                            <constraint firstItem="1DF-nD-EvM" firstAttribute="top" secondItem="yoh-cK-nMp" secondAttribute="top" constant="25" id="vis-ih-EN8"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yt3-wb-vTi" userLabel="Buttons">
@@ -112,6 +130,8 @@
                     <connections>
                         <outlet property="cardView" destination="yoh-cK-nMp" id="E2y-jR-nok"/>
                         <outlet property="homeWrapper" destination="toB-Ua-L8w" id="Gm0-Ac-cCj"/>
+                        <outlet property="likeImage" destination="1DF-nD-EvM" id="zET-c7-TVo"/>
+                        <outlet property="nopeImage" destination="SgG-Iu-tci" id="Yra-DL-uZs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -145,5 +165,7 @@
         <image name="Super Like" width="51" height="51"/>
         <image name="Swipe Card" width="356" height="507"/>
         <image name="crispeta" width="1080" height="1079"/>
+        <image name="like_image" width="170" height="114"/>
+        <image name="nope_image" width="197" height="130"/>
     </resources>
 </document>
