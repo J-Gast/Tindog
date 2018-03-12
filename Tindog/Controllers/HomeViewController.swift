@@ -7,19 +7,26 @@
 //
 
 import UIKit
+import RevealingSplashView
+
 class NavigationImageView : UIImageView {
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize(width: 76, height: 39)
     }
 }
+
 class HomeViewController: UIViewController {
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var homeWrapper: UIStackView!
     @IBOutlet weak var likeImage: UIImageView!
     @IBOutlet weak var nopeImage: UIImageView!
+    let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "splash_icon")!, iconInitialSize: CGSize(width: 80, height:80 ), backgroundColor: UIColor.white)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(self.revealingSplashView)
+        self.revealingSplashView.animationType = SplashAnimationType.popAndZoomOut
+        self.revealingSplashView.startAnimation()
         
         let titleView = NavigationImageView()
         titleView.image = UIImage(named: "Actions")
@@ -28,6 +35,18 @@ class HomeViewController: UIViewController {
         let homeGR = UIPanGestureRecognizer(target: self, action: #selector(cardDragged(gestureRecognizer:)))
         self.cardView.addGestureRecognizer(homeGR)
         
+        let leftBtn = UIButton(type: .custom)
+        leftBtn.setImage(UIImage(named: "login"), for: .normal)
+        leftBtn.imageView?.contentMode = .scaleAspectFit
+        leftBtn.addTarget(self, action: #selector(goToLogin(sender:)), for: .touchUpInside)
+        let leftBarButton = UIBarButtonItem(customView: leftBtn)
+        self.navigationItem.leftBarButtonItem = leftBarButton
+    }
+    
+    @objc func goToLogin(sender: UIButton) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let loginViewController = storyBoard.instantiateViewController(withIdentifier: "loginVC")
+        present(loginViewController, animated: true, completion: nil)
     }
     
     @objc func cardDragged(gestureRecognizer : UIPanGestureRecognizer) {

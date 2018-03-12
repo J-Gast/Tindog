@@ -10,6 +10,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Helvetica.ttc">
+            <string>Helvetica</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -138,6 +143,127 @@
             </objects>
             <point key="canvasLocation" x="476" y="133.5832083958021"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="HXG-Zm-a1s">
+            <objects>
+                <viewController storyboardIdentifier="loginVC" id="Ywx-uA-Qoy" customClass="LoginViewController" customModule="Tindog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="R1f-Nm-8OB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0Bc-ux-6A0">
+                                <rect key="frame" x="50" y="127" width="275" height="413"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0c7-rm-NgL">
+                                        <rect key="frame" x="0.0" y="0.0" width="275" height="218"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WRN-2D-zAo">
+                                                <rect key="frame" x="0.0" y="0.0" width="275" height="218"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_icon" translatesAutoresizingMaskIntoConstraints="NO" id="R9V-Kn-a7A">
+                                                        <rect key="frame" x="105" y="0.0" width="65" height="65"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="65" id="VlM-6e-q0m"/>
+                                                            <constraint firstAttribute="width" constant="65" id="foG-Tr-W85"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tindog" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ae5-ob-izt">
+                                                        <rect key="frame" x="87.5" y="65" width="100" height="53"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="53" id="HY6-fS-SsW"/>
+                                                            <constraint firstAttribute="width" constant="100" id="PIc-FL-ha9"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="32"/>
+                                                        <color key="textColor" red="0.23529411764705882" green="0.2627450980392157" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Es un Tinder para Perritos y Amantes de las mascotas" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F25-MF-pah">
+                                                        <rect key="frame" x="45.5" y="118" width="184" height="100"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="100" id="6pb-Hb-EAh"/>
+                                                            <constraint firstAttribute="width" constant="184" id="aHa-gH-hXt"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                                        <color key="textColor" red="0.41176470588235292" green="0.42745098039215684" blue="0.43529411764705883" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="WRN-2D-zAo" secondAttribute="bottom" id="Gyt-dQ-Z0w"/>
+                                            <constraint firstItem="WRN-2D-zAo" firstAttribute="top" secondItem="0c7-rm-NgL" secondAttribute="top" id="LfG-K3-hWq"/>
+                                            <constraint firstItem="WRN-2D-zAo" firstAttribute="leading" secondItem="0c7-rm-NgL" secondAttribute="leading" id="pFJ-RE-XQ3"/>
+                                            <constraint firstAttribute="trailing" secondItem="WRN-2D-zAo" secondAttribute="trailing" id="sww-jX-4I3"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OEh-gf-E25">
+                                        <rect key="frame" x="0.0" y="218" width="275" height="195"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="cfg-95-Xj6">
+                                                <rect key="frame" x="0.0" y="0.0" width="275" height="195"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="hola@tindog.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sWh-DI-Ox6">
+                                                        <rect key="frame" x="12.5" y="0.0" width="250" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="SQD-8A-qHY"/>
+                                                            <constraint firstAttribute="width" constant="250" id="rsU-3u-Xnd"/>
+                                                        </constraints>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M5R-fL-5js">
+                                                        <rect key="frame" x="12.5" y="65" width="250" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="250" id="mKN-m5-gWn"/>
+                                                            <constraint firstAttribute="height" constant="50" id="vzn-dL-Ggk"/>
+                                                        </constraints>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eMH-9T-M41">
+                                                        <rect key="frame" x="9.5" y="130" width="256" height="65"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="256" id="dYS-wU-s9v"/>
+                                                            <constraint firstAttribute="height" constant="65" id="z6Y-5E-DPf"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
+                                                        <state key="normal" title="Login / Registro" backgroundImage="login_btn_bg">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="cfg-95-Xj6" firstAttribute="leading" secondItem="OEh-gf-E25" secondAttribute="leading" id="7Bm-yz-lCP"/>
+                                            <constraint firstItem="cfg-95-Xj6" firstAttribute="top" secondItem="OEh-gf-E25" secondAttribute="top" id="Csq-NN-Opj"/>
+                                            <constraint firstAttribute="bottom" secondItem="cfg-95-Xj6" secondAttribute="bottom" id="U8g-YC-6bf"/>
+                                            <constraint firstAttribute="trailing" secondItem="cfg-95-Xj6" secondAttribute="trailing" id="jGf-Q0-rYC"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="275" id="Lgv-IZ-Gsi"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0Bc-ux-6A0" firstAttribute="centerX" secondItem="R1f-Nm-8OB" secondAttribute="centerX" id="PWx-eH-5Jh"/>
+                            <constraint firstItem="0Bc-ux-6A0" firstAttribute="centerY" secondItem="R1f-Nm-8OB" secondAttribute="centerY" id="mMA-Q4-dGu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rHm-GY-TUe"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SGc-W6-b6j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1226.4000000000001" y="133.5832083958021"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="J9i-o4-1oc">
             <objects>
@@ -166,6 +292,8 @@
         <image name="Swipe Card" width="356" height="507"/>
         <image name="crispeta" width="1080" height="1079"/>
         <image name="like_image" width="170" height="114"/>
+        <image name="login_btn_bg" width="256" height="65"/>
         <image name="nope_image" width="197" height="130"/>
+        <image name="splash_icon" width="83" height="83"/>
     </resources>
 </document>
