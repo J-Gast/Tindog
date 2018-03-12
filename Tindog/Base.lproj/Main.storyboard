@@ -204,7 +204,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="cfg-95-Xj6">
                                                 <rect key="frame" x="0.0" y="0.0" width="275" height="195"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="hola@tindog.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sWh-DI-Ox6">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="hola@tindog.com" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sWh-DI-Ox6">
                                                         <rect key="frame" x="12.5" y="0.0" width="250" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="SQD-8A-qHY"/>
@@ -214,7 +214,7 @@
                                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M5R-fL-5js">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M5R-fL-5js">
                                                         <rect key="frame" x="12.5" y="65" width="250" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="250" id="mKN-m5-gWn"/>
@@ -251,9 +251,22 @@
                                     <constraint firstAttribute="width" constant="275" id="Lgv-IZ-Gsi"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKY-uR-lKO">
+                                <rect key="frame" x="15" y="30" width="23" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="23" id="jX9-G2-f26"/>
+                                    <constraint firstAttribute="height" constant="23" id="m2z-7i-DB7"/>
+                                </constraints>
+                                <state key="normal" image="close_modal"/>
+                                <connections>
+                                    <action selector="closeBtn:" destination="Ywx-uA-Qoy" eventType="touchUpInside" id="nV1-2T-UkP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="eKY-uR-lKO" firstAttribute="top" secondItem="rHm-GY-TUe" secondAttribute="top" constant="10" id="4KT-AQ-8lu"/>
+                            <constraint firstItem="eKY-uR-lKO" firstAttribute="leading" secondItem="rHm-GY-TUe" secondAttribute="leading" constant="15" id="PUA-SP-wIz"/>
                             <constraint firstItem="0Bc-ux-6A0" firstAttribute="centerX" secondItem="R1f-Nm-8OB" secondAttribute="centerX" id="PWx-eH-5Jh"/>
                             <constraint firstItem="0Bc-ux-6A0" firstAttribute="centerY" secondItem="R1f-Nm-8OB" secondAttribute="centerY" id="mMA-Q4-dGu"/>
                         </constraints>
@@ -290,6 +303,7 @@
         <image name="Rewind" width="51" height="51"/>
         <image name="Super Like" width="51" height="51"/>
         <image name="Swipe Card" width="356" height="507"/>
+        <image name="close_modal" width="23" height="23"/>
         <image name="crispeta" width="1080" height="1079"/>
         <image name="like_image" width="170" height="114"/>
         <image name="login_btn_bg" width="256" height="65"/>
