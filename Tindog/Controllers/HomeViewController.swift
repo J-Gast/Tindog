@@ -8,6 +8,7 @@
 
 import UIKit
 import RevealingSplashView
+import Firebase
 
 class NavigationImageView : UIImageView {
     override func sizeThatFits(_ size: CGSize) -> CGSize {
@@ -20,6 +21,17 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var homeWrapper: UIStackView!
     @IBOutlet weak var likeImage: UIImageView!
     @IBOutlet weak var nopeImage: UIImageView!
+    @IBOutlet weak var cardProfileImage: UIImageView!
+    @IBOutlet weak var cardProfileName: UILabel!
+    
+    
+    let leftBtn  = UIButton(type: .custom)
+    let rightBtn  = UIButton(type: .custom)
+    var currentUserProfile: UserModel?
+    var currentMatch: MatchModel?
+    var secondUserUID: String?
+    var users = [UserModel]()
+    
     let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "splash_icon")!, iconInitialSize: CGSize(width: 80, height:80 ), backgroundColor: UIColor.white)
     
     override func viewDidLoad() {
@@ -35,18 +47,107 @@ class HomeViewController: UIViewController {
         let homeGR = UIPanGestureRecognizer(target: self, action: #selector(cardDragged(gestureRecognizer:)))
         self.cardView.addGestureRecognizer(homeGR)
         
-        let leftBtn = UIButton(type: .custom)
-        leftBtn.setImage(UIImage(named: "login"), for: .normal)
-        leftBtn.imageView?.contentMode = .scaleAspectFit
-        leftBtn.addTarget(self, action: #selector(goToLogin(sender:)), for: .touchUpInside)
-        let leftBarButton = UIBarButtonItem(customView: leftBtn)
+        self.leftBtn.imageView?.contentMode = .scaleAspectFit
+        let leftBarButton = UIBarButtonItem(customView: self.leftBtn)
         self.navigationItem.leftBarButtonItem = leftBarButton
+        
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if let user = user {
+                print("El usuario \(user.uid) se ha logueado correctamente")
+            } else {
+                print("logout")
+            }
+            DatabaseService.instance.observeUserProfile { (userDict) in
+                self.currentUserProfile = userDict
+            }
+            self.getUsers()
+        }
+        UpdateDBService.instance.observeMatch { (matchDict) in
+            if let match = matchDict {
+                if let user = self.currentUserProfile {
+                    if user.userIsOnMatch == false {
+                        print("Tienes un Match")
+                        self.currentMatch = match
+                        self.changeRightBtn(active: true)
+                    }
+                }
+            } else {
+                self.changeRightBtn(active: false)
+            }
+        }
+        self.rightBtn.setImage(UIImage(named:"match_inactive"), for: .normal)
+        self.rightBtn.imageView?.contentMode = .scaleAspectFit
+        let rightBtnBarButton = UIBarButtonItem(customView: self.rightBtn)
+        self.navigationItem.rightBarButtonItem = rightBtnBarButton
+    }
+    
+    func changeRightBtn(active: Bool){
+        if active {
+            self.rightBtn.setImage(UIImage(named:"match_active"), for: .normal)
+            self.rightBtn.addTarget(self, action: #selector(goToMatch(sender:)), for: .touchUpInside)
+        } else {
+            self.rightBtn.removeTarget(nil, action: nil, for: .allEvents)
+            self.rightBtn.setImage(UIImage(named:"match_inactive"), for: .normal)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if Auth.auth().currentUser != nil {
+            self.leftBtn.setImage(UIImage(named: "login_active"), for: .normal)
+            self.leftBtn.removeTarget(self, action: nil, for: .allEvents)
+            self.leftBtn.addTarget(self, action: #selector(goToProfile(sender:)), for: .touchUpInside)
+        } else {
+            self.leftBtn.setImage(UIImage(named: "login"), for: .normal)
+            self.leftBtn.removeTarget(self, action: nil, for: .allEvents)
+            self.leftBtn.addTarget(self, action: #selector(goToLogin(sender:)), for: .touchUpInside)
+        }
     }
     
     @objc func goToLogin(sender: UIButton) {
         let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let loginViewController = storyBoard.instantiateViewController(withIdentifier: "loginVC")
         present(loginViewController, animated: true, completion: nil)
+    }
+    
+    @objc func goToProfile(sender: UIButton) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let profileViewController = storyBoard.instantiateViewController(withIdentifier: "profileVC") as! ProfileViewController
+        profileViewController.currentUserProfile = self.currentUserProfile
+        self.navigationController?.pushViewController(profileViewController, animated: true)
+    }
+    
+    @objc func goToMatch(sender: UIButton) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let matchViewController = storyBoard.instantiateViewController(withIdentifier: "matchVC") as! MatchViewController
+        matchViewController.currentUserProfile = self.currentUserProfile
+        matchViewController.currentMatch = self.currentMatch
+        present(matchViewController, animated: true, completion: nil)
+    }
+
+    func getUsers() {
+        DatabaseService.instance.User_Ref.observeSingleEvent(of: .value) { (snapshot) in
+            let userSnapshot = snapshot.children.flatMap{ UserModel(snapshot: $0 as! DataSnapshot) }
+            for user in userSnapshot {
+                print("user \(user.email)")
+                if self.currentUserProfile?.uid != user.uid {
+                    self.users.append(user)
+                }
+                self.users.append(user)
+            }
+            if self.users.count > 0 {
+                self.updateImage(uid: (self.users.first?.uid)!)
+            }
+        }
+    }
+    
+    func updateImage(uid: String) {
+        DatabaseService.instance.User_Ref.child(uid).observeSingleEvent(of: .value) { (snapshot) in
+            if let userProfile = UserModel(snapshot: snapshot) {
+                self.secondUserUID = userProfile.uid
+                self.cardProfileImage.sd_setImage(with: URL(string: userProfile.profileImage), completed: nil)
+                self.cardProfileName.text = userProfile.displayName
+            }
+        }
     }
     
     @objc func cardDragged(gestureRecognizer : UIPanGestureRecognizer) {
@@ -73,6 +174,14 @@ class HomeViewController: UIViewController {
             }
             if self.cardView.center.x > (self.view.bounds.width / 2 + 100) {
                 print("like")
+                
+                if let uid2 = self.secondUserUID {
+                    DatabaseService.instance.createFirebaseDBMatch(uid: (self.currentUserProfile!.uid), uid2: uid2)
+                }
+            }
+            
+            if self.users.count > 0 {
+                self.updateImage(uid: self.users[self.random(0..<self.users.count)].uid)
             }
             
             rotate = CGAffineTransform(rotationAngle: 0)
@@ -83,6 +192,10 @@ class HomeViewController: UIViewController {
             
             self.cardView.center = CGPoint(x: self.homeWrapper.bounds.width / 2, y: (self.homeWrapper.bounds.height / 2) - 30)
         }
+    }
+    
+    func random(_ range: Range<Int>) -> Int {
+        return range.lowerBound + Int(arc4random_uniform(UInt32(range.upperBound - range.lowerBound)))
     }
     
     override func didReceiveMemoryWarning() {
